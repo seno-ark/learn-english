@@ -156,7 +156,7 @@
         const recognition = new SpeechRecognition();
         const synth = window.speechSynthesis;
 
-        var voices = [];
+        let voices = [];
 
         function log(msg) {
             console.log(msg);
@@ -181,25 +181,29 @@
             utterThis.onerror = function (event) {
                 error('SpeechSynthesisUtterance.onerror');
             }
-            utterThis.voice = voices[0];
+            // console.log(voices);
+            // console.log(voices[0]);
+            // utterThis.voice = voices[0];
             utterThis.rate = 0.7;
             synth.speak(utterThis);
         }
 
         function comListening(phrase, index, callback) {
-            var speechRecognitionList = new SpeechGrammarList();
-            var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
+            const speechRecognitionList = new SpeechGrammarList();
+            const grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
             speechRecognitionList.addFromString(grammar, 1);
             recognition.grammars = speechRecognitionList;
             recognition.lang = 'en-US';
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
+
+            let result = "-";
         
             recognition.start();
             recognition.onresult = function(event) {
                 var speechResult = event.results[0][0].transcript.toLowerCase();
                 log('Confidence: ' + event.results[0][0].confidence);
-                callback(index, speechResult);
+                result = speechResult;
             }
             recognition.onspeechend = function() {
                 recognition.stop();
@@ -208,7 +212,7 @@
             recognition.onerror = function(event) {
                 log('Error occurred in recognition: ' + event.error);
                 // dummy
-                callback(index, event.error);
+                result = event.error;
             }
             recognition.onaudiostart = function(event) {
                 log('SpeechRecognition.onaudiostart');
@@ -218,6 +222,7 @@
             }
             recognition.onend = function(event) {
                 log('SpeechRecognition.onend');
+                callback(index, result);
             }
             recognition.onnomatch = function(event) {
                 log('SpeechRecognition.onnomatch');
@@ -359,11 +364,10 @@
                     comListening(phrase, index, this.answer.bind(this));
                 },
                 getData() {
+                    this.isLoading = true;
+
                     let searchParam = new URLSearchParams(window.location.search);
                     this.id = parseInt(searchParam.get('id') > 0 ? parseInt(searchParam.get('id')) : 1);
-                    
-
-                    this.isLoading = true;
 
                     fetch(`./data/${this.id}.json`)            
                         .then((response) => response.json())
@@ -373,7 +377,7 @@
                             this.dataList = result.contents.map(processData);
                             this.isLoading = false;
 
-                            log(this.dataList);
+                            log(`contents: ${this.dataList.length}`);
                         })
                         .catch(error => {
                             this.isLoading = false;
@@ -415,7 +419,9 @@
                 return x.lang.split("-")[0] === "en";
             });
 
-            console.log("voices", voices);
+            for (const v of voices) {
+                log(`lang ${v.lang}`);
+            }
         }
 
         window.onload = function() {
