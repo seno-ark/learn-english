@@ -1,0 +1,46 @@
+{
+    "title": "Tom and Sophie Take a Lunch Break",
+    "description": "Learn Greetings in your First Day at the Office",
+    "contents": [
+        {
+          "en": "Wow, I'm so hungry. Is it lunch time?",
+          "id": "Wow, aku sangat lapar. Apakah sudah waktunya makan siang?"
+        },
+        {
+          "en": "Yes, it is.",
+          "id": "Ya, sudah."
+        },
+        {
+          "en": "Are you eating here or are you going out?",
+          "id": "Apakah kamu makan di sini atau pergi keluar?"
+        },
+        {
+          "en": "Today, I'm going out. I can show you some places around here. Are you interested?",
+          "id": "Hari ini, aku akan pergi keluar. Aku bisa menunjukkan beberapa tempat di sekitar sini. Apakah kamu tertarik?"
+        },
+        {
+          "en": "Of course. Any favorite lunch spot around here, Sophie?",
+          "id": "Tentu saja. Ada tempat makan siang favorit di sekitar sini, Sophie?"
+        },
+        {
+          "en": "I know a nice one. It's a cafe right down the street. Is that OK for you?",
+          "id": "Aku tahu satu tempat bagus. Ini sebuah kafe tepat di seberang jalan. Apakah itu baik untukmu?"
+        },
+        {
+          "en": "Sounds great!",
+          "id": "Tampak hebat!"
+        },
+        {
+          "en": "Yeah. It's nice to have a break from the office.",
+          "id": "Ya. Bagus juga untuk beristirahat dari kantor."
+        },
+        {
+          "en": "It is. Is the cafe within walking distance?",
+          "id": "Iya. Apakah kafe itu bisa dijangkau dengan berjalan kaki?"
+        },
+        {
+          "en": "Well, it's not far. Come on. We can go together.",
+          "id": "Nah, tidak jauh kok. Ayolah. Kita bisa pergi bersama."
+        }
+      ]
+}

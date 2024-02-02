@@ -1,0 +1,42 @@
+{
+    "title": "End of the First Day",
+    "description": "Learn Greetings in your First Day at the Office",
+    "contents": [
+        {
+          "en": "Hey. You're Sarah, right?",
+          "id": "Hai. Kamu Sarah, kan?"
+        },
+        {
+          "en": "I'm Jake, from Security. I'm here to give you your access card.",
+          "id": "Aku Jake, dari Keamanan. Aku di sini untuk memberikan kartu aksesmu."
+        },
+        {
+          "en": "Thanks, Jake. Is it contactless?",
+          "id": "Terima kasih, Jake. Apakah ini tanpa kontak?"
+        },
+        {
+          "en": "No, it isn't. It's the good-old swipe at the door. When you hear the click, it's unlocked, and you can get in or out.",
+          "id": "Tidak, bukan. Ini cara lama dengan menggesekkan di pintu. Ketika kamu mendengar klik, itu terbuka, dan kamu bisa masuk atau keluar."
+        },
+        {
+          "en": "Good to know. Thank you!",
+          "id": "Baik untuk diketahui. Terima kasih!"
+        },
+        {
+          "en": "Well, it's five o'clock. I guess this is it for your first day. How was it?",
+          "id": "Nah, sudah pukul lima. Kira-kira itu saja untuk hari pertamamu. Bagaimana rasanya?"
+        },
+        {
+          "en": "Good, really good.",
+          "id": "Baik, benar-benar baik."
+        },
+        {
+          "en": "See you tomorrow, then?",
+          "id": "Sampai jumpa besok, ya?"
+        },
+        {
+          "en": "Sure. Have a great evening. See you!",
+          "id": "Tentu. Semoga memiliki malam yang menyenangkan. Sampai jumpa!"
+        }
+      ]
+}

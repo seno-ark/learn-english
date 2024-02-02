@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn English</title>
+    <script defer src="./cdn.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            font-size: 17px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #333;
+
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #111;
+        }
+        
+        a {
+            color: #111;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        footer {
+            padding: 20px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        #header {
+            background: #f5f5f5;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 640px;
+            margin: 0px auto;
+        }
+        .flex {
+            display: flex;
+            justify-content: space-between;
+        }
+        .h-space {
+            padding: 10px 0px 10px 0px;
+        }
+        .v-space {
+            margin: 0px 5px 0px 0px;
+            padding: 2px;
+        }
+        .bottom-line {
+            border-bottom: 1px solid #eaeaea;
+        }
+        .green {
+            background: lightblue;
+        }
+        .yellow {
+            background: khaki;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div x-data="fetcher()" x-init="getData()">
+
+            <div id="header" class="container">
+                <div class="h-space"></div>
+
+                <b>#<span x-text="id"></span></b>
+                <h1 x-text="title" class="h-space"></h1>
+                <p class="h-space" x-text="description"></p>
+
+                <div class="h-space flex">
+                    <div x-data="{ prevID: id-1 }">
+                        <a x-show="id > 1" :href=`./?id=${prevID}`>Prev</a>
+                    </div>
+                    <div x-data="{ nextID: id+1 }">
+                        <a :href=`./?id=${nextID}`>Next</a>
+                    </div>
+                </div>
+
+                <div class="h-space"></div>
+            </div>
+
+            <div class="container">
+                <div class="h-space"></div>
+
+                <template x-for="(data, index) in dataList">                    
+                    <div class="h-space">
+
+                        <div>
+                            <template x-if="!data.completed">
+                                <div>
+                                    <button x-show="!data.isListening" @click="recognize(index)">💬 Speak</button>
+                                    <small x-text="data.listening"></small>
+                                </div>
+                            </template>
+
+                            <template x-if="data.completed">
+                                <button @click="reset(index)">🔥 Reset</button>
+                            </template>
+                        </div>
+
+                        <div class="h-space">
+                            <template x-for="(s, i) in data.sections">
+                                <span class="v-space" :class="i < data.asnwered ? 'green' : ''" x-text="s.id" @click="synthesis(index, i)"></span>
+                            </template>
+                        </div>
+
+                        <div>
+                            <span>🤖</span>
+                            <small class="yellow" x-text="data.speaking"></small>
+                        </div>
+
+                        <div class="h-space bottom-line"></div>
+
+                    </div>
+                </template>
+            </div>
+        </div>
+    </main>
+
+    <footer>&copy 2024</footer>
+
+    <script>
+
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+        var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+        
+        const recognition = new SpeechRecognition();
+        const synth = window.speechSynthesis;
+
+        var voices = [];
+
+        function log(msg) {
+            console.log(msg);
+        }
+
+        function comSpeaking(text) {
+            if (synth.speaking) {
+                log('speechSynthesis.speaking');
+                return;
+            }
+            if (text === '') {
+                return;
+            }
+                
+            var utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.onend = function (event) {
+                log('SpeechSynthesisUtterance.onend');
+            }
+            utterThis.onerror = function (event) {
+                error('SpeechSynthesisUtterance.onerror');
+            }
+            utterThis.voice = voices[0];
+            utterThis.rate = 0.7;
+            synth.speak(utterThis);
+        }
+
+        function comListening(phrase, index, callback) {
+            var speechRecognitionList = new SpeechGrammarList();
+            var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
+            speechRecognitionList.addFromString(grammar, 1);
+            recognition.grammars = speechRecognitionList;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+        
+            recognition.start();
+            recognition.onresult = function(event) {
+                var speechResult = event.results[0][0].transcript.toLowerCase();
+                log('Confidence: ' + event.results[0][0].confidence);
+                callback(index, speechResult);
+            }
+            recognition.onspeechend = function() {
+                recognition.stop();
+                log("recognition ended")
+            }
+            recognition.onerror = function(event) {
+                log('Error occurred in recognition: ' + event.error);
+                // dummy
+                callback(index, event.error);
+            }
+            recognition.onaudiostart = function(event) {
+                log('SpeechRecognition.onaudiostart');
+            }
+            recognition.onaudioend = function(event) {
+                log('SpeechRecognition.onaudioend');
+            }
+            recognition.onend = function(event) {
+                log('SpeechRecognition.onend');
+            }
+            recognition.onnomatch = function(event) {
+                log('SpeechRecognition.onnomatch');
+            }
+            recognition.onsoundstart = function(event) {
+                log('SpeechRecognition.onsoundstart');
+            }
+            recognition.onsoundend = function(event) {
+                log('SpeechRecognition.onsoundend');
+            }
+            recognition.onspeechstart = function (event) {
+                log('SpeechRecognition.onspeechstart');
+            }
+            recognition.onstart = function(event) {
+                log('SpeechRecognition.onstart');
+            }
+        }
+
+        function splitText(text) {
+            const results = [];
+
+            let sentence = [];
+            for (const w of text.replace("/", "-").split(/[ -]+/)) {
+                sentence.push(w);
+                // || w.endsWith(",")
+                if (w.endsWith(".") || w.endsWith("?") || w.endsWith("!") || w.endsWith(";") || w.endsWith(",")) {
+                    results.push(sentence.join(" "));
+                    sentence = [];
+                }
+            }
+
+            if (sentence.length > 0) {
+                results.push(sentence.join(" "));
+            }
+
+            return results
+        }
+
+        function processData(data) {
+            const enWords = data.en.replace("/", "-").split(/[ -]+/); // split by space, dash, and slash
+            const idWords = data.id.split(" ");
+
+            data.sections = [];
+            data.asnwered = 0;
+            data.speaking = "";
+            data.listening = "";
+            data.isListening = false;
+            data.completed = false;
+
+            const idSection = splitText(data.id);
+            const enSection = splitText(data.en);
+
+            if (enSection.length != idSection.length) {
+                console.log("DIFF", enSection, idSection)
+            }
+
+            for (const i in idSection) {
+                data.sections.push({
+                    id: idSection[i],
+                    en: enSection[i]
+                })
+            }
+
+            return data;
+        }
+
+        function fetcher() {
+            return {
+                isLoading: false,
+                title: "",
+                description: "",
+                dataList: [],
+                reset(index) {
+                    this.dataList[index].listening = "";
+                    this.dataList[index].asnwered = 0;
+                    this.dataList[index].completed = false;
+                },
+                correct(index) {
+                    if (this.dataList[index].sections.length > this.dataList[index].asnwered) {
+                        this.dataList[index].asnwered += 1;
+                    }
+                    if (this.dataList[index].asnwered >= this.dataList[index].sections.length) {
+                        this.dataList[index].completed = true;
+                    }
+                },
+                answer(index, text) {
+                    this.dataList[index].isListening = false;
+                    this.dataList[index].listening = text;
+
+                    let answerText = text;
+                    while (true) {
+                        answerText = replaceSymbol(answerText);
+
+                        const answerID = this.dataList[index].asnwered;
+
+                        let currentPhrase = this.dataList[index].sections[answerID].en;
+                        currentPhrase = replaceSymbol(currentPhrase);
+
+                        if (answerText === "test") {
+                            answerText = currentPhrase;
+                        }
+
+                        if (currentPhrase === answerText) {
+                            answerText = "";
+                            this.correct(index);
+                            log("match perfect");
+                            break;
+                        }
+                    
+                        if (answerText.startsWith(currentPhrase)) {
+                            answerText = answerText.replace(currentPhrase, "");
+                            this.correct(index);
+                            log("partial match");
+                            continue;
+                        }
+
+                        log("not match " + currentPhrase + answerText);
+                        break;
+                    }
+
+                    this.dataList[index].listening = answerText;
+                },
+                synthesis(index, clickedIndex) {
+                    const text = this.dataList[index].sections[clickedIndex].en;
+                    log("synthesis " + text);
+                    this.dataList[index].speaking = text;
+                    comSpeaking(text);
+                },
+                recognize(index) {
+                    if (this.dataList[index].completed === true) {
+                        return;
+                    }
+
+                    this.dataList[index].isListening = true;
+                    this.dataList[index].listening = "...";
+                    
+                    const phrase = this.dataList[index].en;
+                    log("recognize " + phrase);
+                    comListening(phrase, index, this.answer.bind(this));
+                },
+                getData() {
+                    let searchParam = new URLSearchParams(window.location.search);
+                    this.id = parseInt(searchParam.get('id') > 0 ? parseInt(searchParam.get('id')) : 1);
+                    
+
+                    this.isLoading = true;
+
+                    fetch(`./data/${this.id}.json`)            
+                        .then((response) => response.json())
+                        .then((result) => { 
+                            this.title = result.title;
+                            this.description = result.description;
+                            this.dataList = result.contents.map(processData);
+                            this.isLoading = false;
+
+                            log(this.dataList);
+                        })
+                        .catch(error => {
+                            this.isLoading = false;
+                            window.location.href = "/";
+                        });
+                }
+            }
+        }
+
+        function replaceSymbol(a) {
+            return a.replace(/[^a-zA-Z0-9 ']/g, '')
+            .trim()
+            .toLowerCase()
+            .replace("hey", "hi")
+            .replace("hay", "hi")
+            .replace("hmm...", "hmm")
+            .replace("he is", "he's")
+            .replace("she is", "she's")
+            .replace("it is", "it's")
+            .replace("you are", "you're")
+            .replace("we are", "we're")
+            .replace("they are", "they're")
+            .replace("i am", "i'm")
+            .replace("who is", "who's")
+            .replace("that is", "that's")
+            .replace("how is", "how's")
+            .replace("what is", "what's")
+            .replace("where is", "where's")
+            .replace("come on", "c'mon")
+            .replace("do not", "don't")
+            .replace("is not", "isn’t")
+            .replace("you have", "you've")
+            .replace("can not", "can’t")
+            .replace("will not", "won’t");
+        }
+
+        function populateVoiceList() {
+            voices = synth.getVoices().filter(x => {
+                return x.lang.split("-")[0] === "en";
+            });
+
+            console.log("voices", voices);
+        }
+
+        window.onload = function() {
+            populateVoiceList();
+        }();
+
+    </script>
+</body>
+</html>

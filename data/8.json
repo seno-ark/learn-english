@@ -1,0 +1,34 @@
+{
+    "title": "Team Meeting Introduction",
+    "description": "Learn Introductions in an Online Team Meeting",
+    "contents": [
+        {
+          "en": "Good morning, everyone! I hope you're well. Today, we have a new member joining our team. I'd like to introduce you to Lisa. She's our new front-end developer. Let me introduce you all briefly. This is Sarah, the senior developer. You can talk to her any time, even in this virtual setting, if you have questions, Lisa.",
+          "id": "Selamat pagi, semuanya! Semoga kalian baik-baik saja. Hari ini, kita memiliki anggota baru yang bergabung dengan tim kita. Saya ingin memperkenalkan kalian pada Lisa. Dia adalah pengembang front-end baru kita. Izinkan saya memperkenalkan singkat kalian semua. Ini adalah Sarah, pengembang senior. Kamu bisa berbicara dengannya kapan saja, bahkan dalam pengaturan virtual seperti ini, jika kamu punya pertanyaan, Lisa."
+        },
+        {
+          "en": "Hi, Sarah. Thank you! I'm excited to work with all of you and learn from your expertise.",
+          "id": "Hai, Sarah. Terima kasih! Saya sangat bersemangat untuk bekerja dengan kalian semua dan belajar dari keahlian kalian."
+        },
+        {
+          "en": "This is Tom, our new graphic designer. Is there any specific area of design or development you're interested in? He's your go-to guy for that.",
+          "id": "Ini adalah Tom, desainer grafis baru kita. Apakah ada area desain atau pengembangan tertentu yang kamu minati? Dia adalah orang yang bisa kamu hubungi untuk itu."
+        },
+        {
+          "en": "Hi, Tom. I'm interested in UI/UX design and front-end development, but I'm open to exploring more.",
+          "id": "Hai, Tom. Saya tertarik pada desain UI/UX dan pengembangan front-end, tapi saya terbuka untuk menjelajahi lebih banyak."
+        },
+        {
+          "en": "And I'm Bob, the team's project manager. I'm the person you always need to talk to if you have any questions about the team's goals and schedule.",
+          "id": "Dan saya Bob, manajer proyek tim. Saya orang yang harus selalu kamu ajak bicara jika kamu memiliki pertanyaan tentang tujuan dan jadwal tim."
+        },
+        {
+          "en": "Hi, Bob. It's great to meet you too.",
+          "id": "Hai, Bob. Senang bertemu denganmu juga."
+        },
+        {
+          "en": "Excellent! Lisa, it's great to have you join our team, even if just online. OK, team. Let's help Lisa with the support she needs to start. Now here are the topics on today's agenda…",
+          "id": "Bagus sekali! Lisa, senang rasanya memilikimu bergabung dengan tim kita, meskipun hanya secara online. Baiklah, tim. Mari bantu Lisa dengan dukungan yang dia butuhkan untuk memulai. Sekarang ini adalah topik-topik dalam agenda hari ini…"
+        }
+      ]
+}

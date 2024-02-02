@@ -1,0 +1,14 @@
+{
+    "title": "Introducing the New Junior Developer",
+    "description": "Learn Introductions in an Online Team Meeting",
+    "contents": [
+        {
+          "en": "Alright, team. This is Alice's first day with us, so please let me introduce you all to her. Well, I'm Bob, your project manager. I'm really happy to see new faces joining the team. This is Sarah, the senior software developer. She has been with the company for five years now, working on several projects. This is John, the database administrator. He's been here for three years. He makes sure our data is secure and efficient. Finally, this is Linda, our UX/UI designer. She joined the team last year. She loves creating user-friendly interfaces. Everybody, let's welcome Alice to the team.",
+          "id": "Baiklah, tim. Ini hari pertama Alice bersama kami, jadi izinkan saya memperkenalkannya kepada kalian semua. Nah, saya Bob, manajer proyek kalian. Saya sangat senang melihat wajah-wajah baru bergabung dengan tim. Ini adalah Sarah, pengembang perangkat lunak senior. Dia telah bersama perusahaan ini selama lima tahun sekarang, bekerja pada beberapa proyek. Ini adalah John, administrator basis data. Dia sudah di sini selama tiga tahun. Dia memastikan data kita aman dan efisien. Terakhir, ini adalah Linda, desainer UX/UI kita. Dia bergabung dengan tim tahun lalu. Dia suka membuat antarmuka yang ramah pengguna. Semuanya, mari sambut Alice di tim."
+        },
+        {
+          "en": "Great! Thanks, everybody! Well, I'm Alice. I'm starting as a junior developer today. I really like learning new things and I can't wait to start contributing to our projects.",
+          "id": "Hebat! Terima kasih, semuanya! Nah, saya Alice. Saya memulai sebagai pengembang junior hari ini. Saya sangat suka belajar hal-hal baru dan saya tidak sabar untuk mulai berkontribusi pada proyek-proyek kita."
+        }
+      ]
+}

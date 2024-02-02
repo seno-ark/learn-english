@@ -1,0 +1,30 @@
+{
+    "title": "Sophie Introduces Brian to Tom",
+    "description": "Learn Greetings in your First Day at the Office",
+    "contents": [
+        {
+          "en": "Oh, look who's here! Hey, Brian! How is everything?",
+          "id": "Oh, lihat siapa yang ada di sini! Hai, Brian! Bagaimana kabarnya?"
+        },
+        {
+          "en": "Sophie! Great to see you here.",
+          "id": "Sophie! Senang melihatmu di sini."
+        },
+        {
+          "en": "You too. Brian, let me introduce you to Tom. Tom, this is Brian. He's a web developer. Brian, this is Tom. He's our new graphic designer, and he is from Texas.",
+          "id": "Kamu juga. Brian, izinkan aku memperkenalkanmu pada Tom. Tom, ini Brian. Dia seorang pengembang web. Brian, ini Tom. Dia desainer grafis baru kita, dan dia berasal dari Texas."
+        },
+        {
+          "en": "It is a pleasure to meet you, Tom. Sophie is a great workmate. She's very kind and helpful.",
+          "id": "Senang bertemu denganmu, Tom. Sophie adalah rekan kerja yang hebat. Dia sangat baik dan membantu."
+        },
+        {
+          "en": "Oh, c'mon, Brian!",
+          "id": "Oh, ayolah, Brian!"
+        },
+        {
+          "en": "But it's true. She's the person to go to if you need help!",
+          "id": "Tapi itu benar. Dia orang yang harus ditemui jika kamu membutuhkan bantuan!"
+        }
+      ]
+}

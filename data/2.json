@@ -1,0 +1,50 @@
+{
+    "title": "Tom Meets the Coworker Next To Him",
+    "description": "Learn Greetings in your First Day at the Office",
+    "contents": [
+        {
+          "en": "Hi, there. I'm Tom. I'm the new graphic designer.",
+          "id": "Hai, di sana. Aku Tom. Aku desainer grafis baru."
+        },
+        {
+          "en": "Oh, hi Tom! I'm Sophie. I'm a developer. Where are you from, Tom?",
+          "id": "Oh, hai Tom! Aku Sophie. Aku seorang pengembang. Dari mana asalmu, Tom?"
+        },
+        {
+          "en": "I'm from Texas. How about you?",
+          "id": "Aku berasal dari Texas. Bagaimana denganmu?"
+        },
+        {
+          "en": "I'm from here, in California. Welcome aboard.",
+          "id": "Aku dari sini, di California. Selamat datang."
+        },
+        {
+          "en": "Thanks. Everybody is so nice around here. Hey, is this one of those standing desks? These are great! It's good to stand up a little instead of just sitting all the time.",
+          "id": "Terima kasih. Semua orang sangat ramah di sini. Hei, apakah ini salah satu meja berdiri itu? Ini keren! Baik juga berdiri sebentar daripada duduk terus-menerus."
+        },
+        {
+          "en": "That's so true. I'm a bit inactive, sitting all the time. This is a good alternative for me. But hey, now your desk is just like my desk. You're in luck.",
+          "id": "Itu benar sekali. Aku agak tidak aktif, duduk terus-menerus. Ini alternatif bagus bagiku. Tapi hei, sekarang mejamu sama seperti mejaku. Kamu beruntung."
+        },
+        {
+          "en": "Oh, awesome. My computer and drawing tablet are great too.",
+          "id": "Oh, keren. Komputer dan tablet gambar saya juga bagus."
+        },
+        {
+          "en": "Yeah. At this company, they're very attentive to these details. You're going to like it here if you're into cutting-edge gadgets.",
+          "id": "Ya. Di perusahaan ini, mereka sangat memperhatikan detail-detail tersebut. Kamu akan suka di sini jika kamu tertarik pada gadget-gadget mutakhir."
+        },
+        {
+          "en": "This is so cool. A standing desk, an ergonomic chair, and an ergonomic mouse. Man, everything is perfect. I'm in love with this place!",
+          "id": "Ini sangat keren. Meja berdiri, kursi ergonomis, dan mouse ergonomis. Wah, semuanya sempurna. Aku jatuh cinta dengan tempat ini!"
+        },
+        {
+          "en": "So nice to have someone so energetic like you in the team. Are you ready to begin?",
+          "id": "Senang memiliki seseorang yang begitu energik seperti kamu di tim. Apakah kamu siap untuk memulai?"
+        },
+        {
+          "en": "Yes, I sure am!",
+          "id": "Ya, pasti!"
+        }
+    ]
+}

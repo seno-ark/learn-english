@@ -1,0 +1,30 @@
+{
+  "title": "Maria Introduces Herself to Tom",
+  "description": "Learn Greetings in your First Day at the Office",
+  "contents": [
+    {
+      "en": "Hello! You're the new graphic designer, right? I'm Maria, the team lead.",
+      "id": "Halo! Kamu desainer grafis baru, kan? Aku Maria, kepala tim."
+    },
+    {
+      "en": "Hi, that's right! I'm Tom McKenzie. It's a pleasure to meet you.",
+      "id": "Ya, benar! Aku Tom McKenzie. Senang bertemu denganmu."
+    },
+    {
+      "en": "Welcome aboard, Tom! How do you like California so far?",
+      "id": "Selamat datang, Tom! Bagaimana pendapatmu tentang California sampai sejauh ini?"
+    },
+    {
+      "en": "I like it. It's different from Texas, but I like it here.",
+      "id": "Aku suka. Berbeda dari Texas, tapi aku suka di sini."
+    },
+    {
+      "en": "Great! Let me show you to your desk. Do you see the desk with a drawing tablet and a computer? That's your workspace.",
+      "id": "Bagus! Biarkan aku menunjukkanmu ke mejamu. Apakah kamu melihat meja dengan tablet gambar dan komputer? Itu adalah tempat kerjamu."
+    },
+    {
+      "en": "Everything looks great. Thanks for showing me around the place, Maria.",
+      "id": "Semuanya terlihat bagus. Terima kasih sudah menunjukkan tempat ini padaku, Maria."
+    }
+  ]
+}

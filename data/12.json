@@ -1,0 +1,42 @@
+{
+    "title": "New Hobbies",
+    "description": "Learn Conversation Starters in the Break Room",
+    "contents": [
+        {
+          "en": "Hey, Tom! I saw you taking lots of pics with your cell phone outside the building. Are you into photography?",
+          "id": "Hai, Tom! Saya melihat kamu mengambil banyak foto dengan ponsel di luar gedung. Apakah kamu suka fotografi?"
+        },
+        {
+          "en": "Yes, I love it. But I'm only practicing. How about you? Do you have any hobbies?",
+          "id": "Ya, saya suka. Tapi saya hanya berlatih. Bagaimana dengan kamu? Apakah kamu punya hobi?"
+        },
+        {
+          "en": "That's cool! I like photography, but I don't think of it as a hobby. I play the guitar in my free time.",
+          "id": "Itu keren! Saya suka fotografi, tapi saya tidak menganggapnya sebagai hobi. Saya bermain gitar di waktu luang saya."
+        },
+        {
+          "en": "Wow! Electric or acoustic?",
+          "id": "Wow! Listrik atau akustik?"
+        },
+        {
+          "en": "Electric, for sure! Back to your hobbies, though. Do you have any favorite photography themes?",
+          "id": "Listrik, pasti! Kembali ke hobi kamu, ya. Apakah kamu punya tema fotografi favorit?"
+        },
+        {
+          "en": "I like landscapes and street photography, mostly. And you? What kind of music do you like to play on your guitar?",
+          "id": "Saya suka pemandangan dan fotografi jalanan, sebagian besar. Dan kamu? Genre musik apa yang suka kamu mainkan di gitar?"
+        },
+        {
+          "en": "I enjoy classic rock. But any nice tune makes my day.",
+          "id": "Saya menikmati rock klasik. Tapi setiap lagu yang bagus membuat hariku."
+        },
+        {
+          "en": "Cool! I want to hear you play some day.",
+          "id": "Keren! Saya ingin mendengarkan kamu bermain suatu hari nanti."
+        },
+        {
+          "en": "Only if you show me your favorite pics. It's a deal!",
+          "id": "Hanya jika kamu menunjukkan foto favoritmu padaku. Itu kesepakatan!"
+        }
+      ]
+}

@@ -1,0 +1,34 @@
+{
+    "title": "Meeting a Client",
+    "description": "Learn Introductions in an Online Team Meeting",
+    "contents": [
+        {
+          "en": "Welcome, everyone. Today, we have with us our clients from FCC Corporation. David, let me introduce the team and briefly explain what we do. I'm Maria, the lead developer. I'm responsible for the technical aspects of the project. This is Bob, the project manager. He's responsible for coordinating our efforts to meet your needs.",
+          "id": "Selamat datang, semuanya. Hari ini, kami memiliki klien kami dari FCC Corporation. David, izinkan saya memperkenalkan tim dan menjelaskan secara singkat apa yang kami lakukan. Saya Maria, pengembang utama. Saya bertanggung jawab atas aspek teknis proyek. Ini adalah Bob, manajer proyek. Dia bertanggung jawab untuk mengkoordinasikan upaya kami untuk memenuhi kebutuhan Anda."
+        },
+        {
+          "en": "Hey, Bob. How's it going?",
+          "id": "Hai, Bob. Apa kabar?"
+        },
+        {
+          "en": "This is Sarah, the senior developer. She and I work together to ensure the project's success.",
+          "id": "Ini adalah Sarah, pengembang senior. Dia dan saya bekerja sama untuk memastikan kesuksesan proyek."
+        },
+        {
+          "en": "Great to meet you, Sarah.",
+          "id": "Senang bertemu denganmu, Sarah."
+        },
+        {
+          "en": "And this is Linda; she's our UX/UI designer. She works in user experience and creates our interface design.",
+          "id": "Dan ini adalah Linda; dia desainer UX/UI kami. Dia bekerja dalam pengalaman pengguna dan membuat desain antarmuka kami."
+        },
+        {
+          "en": "Wonderful to meet you all. I'm David, the project manager from FCC Corp. I'll be your point of contact and I'll make sure our collaboration is great. We're excited about this project. I'm confident that we can achieve great results.",
+          "id": "Senang bertemu dengan kalian semua. Saya David, manajer proyek dari FCC Corp. Saya akan menjadi kontak Anda dan akan memastikan kolaborasi kita baik. Kami sangat bersemangat tentang proyek ini. Saya yakin kita bisa mencapai hasil yang luar biasa."
+        },
+        {
+          "en": "Thanks. Now let's get started with the project details and your specific requirements, David.",
+          "id": "Terima kasih. Sekarang mari mulai dengan detail proyek dan kebutuhan khusus Anda, David."
+        }
+      ]
+}
