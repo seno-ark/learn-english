@@ -39,6 +39,10 @@
             font-weight: bold;
         }
 
+        logs {
+            font-size: 0.6rem;
+        }
+
         footer {
             padding: 20px;
             font-size: 0.75rem;
@@ -62,17 +66,18 @@
             padding: 10px 0px 10px 0px;
         }
         .v-space {
-            margin: 0px 5px 0px 0px;
-            padding: 2px;
+            margin-right: 5px;
         }
         .bottom-line {
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid #efefef;
         }
         .green {
             background: lightblue;
+            padding: 2px;
         }
         .yellow {
             background: khaki;
+            padding: 2px;
         }
     </style>
 </head>
@@ -127,7 +132,7 @@
 
                         <div>
                             <span>🤖</span>
-                            <small class="yellow" x-text="data.speaking"></small>
+                            <small x-show="data.speaking.length > 0" class="yellow" x-text="data.speaking"></small>
                         </div>
 
                         <div class="h-space bottom-line"></div>
@@ -137,6 +142,8 @@
             </div>
         </div>
     </main>
+
+    <logs></logs>
 
     <footer>&copy 2024</footer>
 
@@ -153,6 +160,9 @@
 
         function log(msg) {
             console.log(msg);
+            const el = document.createElement("p");
+            el.textContent = msg;
+            document.querySelector("logs").appendChild(el);
         }
 
         function comSpeaking(text) {
@@ -324,7 +334,7 @@
                             continue;
                         }
 
-                        log("not match " + currentPhrase + answerText);
+                        log(`not match: ${currentPhrase} : ${answerText}`);
                         break;
                     }
 
@@ -332,7 +342,7 @@
                 },
                 synthesis(index, clickedIndex) {
                     const text = this.dataList[index].sections[clickedIndex].en;
-                    log("synthesis " + text);
+                    log("synthesis: " + text);
                     this.dataList[index].speaking = text;
                     comSpeaking(text);
                 },
@@ -345,7 +355,7 @@
                     this.dataList[index].listening = "...";
                     
                     const phrase = this.dataList[index].en;
-                    log("recognize " + phrase);
+                    log("recognize: " + phrase);
                     comListening(phrase, index, this.answer.bind(this));
                 },
                 getData() {
