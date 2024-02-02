@@ -168,8 +168,7 @@
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
         var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
         var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-        
-        const recognition = new SpeechRecognition();
+
         const synth = window.speechSynthesis;
 
         let voices = [];
@@ -184,10 +183,10 @@
         function comSpeaking(text) {
             if (synth.speaking) {
                 log('speechSynthesis.speaking');
-                return;
+                return "";
             }
             if (text === '') {
-                return;
+                return "";
             }
                 
             var utterThis = new SpeechSynthesisUtterance(text);
@@ -202,9 +201,11 @@
             // utterThis.voice = voices[0];
             utterThis.rate = 0.7;
             synth.speak(utterThis);
+            return "ok";
         }
 
         function comListening(phrase, index, callback) {
+            const recognition = new SpeechRecognition();
             const speechRecognitionList = new SpeechGrammarList();
             const grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
             speechRecognitionList.addFromString(grammar, 1);
@@ -366,8 +367,11 @@
                 synthesis(index, clickedIndex) {
                     const text = this.dataList[index].sections[clickedIndex].en;
                     log("synthesis: " + text);
-                    this.dataList[index].speaking = text;
-                    comSpeaking(text);
+
+                    const newText = comSpeaking(text);
+                    if (newText !== "") {
+                        this.dataList[index].speaking = text;
+                    }
                 },
                 recognize(index) {
                     if (this.dataList[index].completed === true) {
