@@ -137,7 +137,9 @@
                             <template x-if="!data.completed">
                                 <div>
                                     <button x-show="!isListening" @click="recognize(index)">💬 Speak</button>
-                                    <small x-show="data.listening.length > 0" class="red v-space" x-text="data.listening"></small>
+                                    <div x-show="data.listening.length > 0" class="h-space">
+                                        <small class="red v-space" x-text="data.listening"></small>
+                                    </div>
                                 </div>
                             </template>
 
