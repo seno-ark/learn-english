@@ -309,6 +309,8 @@
                     }
                 },
                 answer(index, text) {
+                    log(`recognize result: ${text}`);
+
                     this.dataList[index].isListening = false;
                     this.dataList[index].listening = text;
 
