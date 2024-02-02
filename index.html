@@ -65,19 +65,29 @@
         .h-space {
             padding: 10px 0px 10px 0px;
         }
-        .v-space {
+        .r-margin {
             margin-right: 5px;
         }
         .bottom-line {
             border-bottom: 1px solid #efefef;
         }
+
+        .v-space {
+            padding: 3px 5px 3px 5px;
+            border-radius: 2px;
+        }
+        .red {
+            background: rgb(224, 159, 133);
+        }
         .green {
-            background: lightblue;
-            padding: 2px;
+            background: rgb(185, 231, 192);
         }
         .yellow {
-            background: khaki;
-            padding: 2px;
+            background: rgb(238, 247, 146);
+        }
+
+        .sans {
+            font-family: Arial, Helvetica, sans-serif;
         }
     </style>
 </head>
@@ -112,27 +122,27 @@
                     <div class="h-space">
 
                         <div>
+                            <span>🤖</span>
+                            <small x-show="data.speaking.length > 0" class="yellow v-space" x-text="data.speaking"></small>
+                        </div>
+
+                        <div class="h-space">
+                            <template x-for="(s, i) in data.sections">
+                                <span class="r-margin sans" :class="i < data.asnwered ? 'green v-space' : ''" x-text="s.id" @click="synthesis(index, i)"></span>
+                            </template>
+                        </div>
+
+                        <div>
                             <template x-if="!data.completed">
                                 <div>
-                                    <button x-show="!data.isListening" @click="recognize(index)">💬 Speak</button>
-                                    <small x-text="data.listening"></small>
+                                    <button x-show="!isListening" @click="recognize(index)">💬 Speak</button>
+                                    <small x-show="data.listening.length > 0" class="red v-space" x-text="data.listening"></small>
                                 </div>
                             </template>
 
                             <template x-if="data.completed">
                                 <button @click="reset(index)">🔥 Reset</button>
                             </template>
-                        </div>
-
-                        <div class="h-space">
-                            <template x-for="(s, i) in data.sections">
-                                <span class="v-space" :class="i < data.asnwered ? 'green' : ''" x-text="s.id" @click="synthesis(index, i)"></span>
-                            </template>
-                        </div>
-
-                        <div>
-                            <span>🤖</span>
-                            <small x-show="data.speaking.length > 0" class="yellow" x-text="data.speaking"></small>
                         </div>
 
                         <div class="h-space bottom-line"></div>
@@ -200,7 +210,7 @@
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
-            let result = "-";
+            let result = "";
         
             recognition.start();
             recognition.onresult = function(event) {
@@ -214,8 +224,7 @@
             }
             recognition.onerror = function(event) {
                 log('Error occurred in recognition: ' + event.error);
-                // dummy
-                result = event.error;
+                result = `error: ${event.error}`;
             }
             recognition.onaudiostart = function(event) {
                 log('SpeechRecognition.onaudiostart');
@@ -229,6 +238,7 @@
             }
             recognition.onnomatch = function(event) {
                 log('SpeechRecognition.onnomatch');
+                result = "nomatch: Speech not recognized";
             }
             recognition.onsoundstart = function(event) {
                 log('SpeechRecognition.onsoundstart');
@@ -272,7 +282,6 @@
             data.asnwered = 0;
             data.speaking = "";
             data.listening = "";
-            data.isListening = false;
             data.completed = false;
 
             const idSection = splitText(data.id);
@@ -295,6 +304,7 @@
         function fetcher() {
             return {
                 isLoading: false,
+                isListening: false,
                 title: "",
                 description: "",
                 dataList: [],
@@ -314,7 +324,7 @@
                 answer(index, text) {
                     log(`recognize result: ${text}`);
 
-                    this.dataList[index].isListening = false;
+                    this.isListening = false;
                     this.dataList[index].listening = text;
 
                     let answerText = text;
@@ -361,10 +371,10 @@
                         return;
                     }
 
-                    this.dataList[index].isListening = true;
+                    this.isListening = true;
                     this.dataList[index].listening = "...";
                     
-                    const phrase = this.dataList[index].en;
+                    const phrase = replaceSymbol(this.dataList[index].en);
                     log("recognize: " + phrase);
                     comListening(phrase, index, this.answer.bind(this));
                 },
