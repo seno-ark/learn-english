@@ -71,7 +71,7 @@
         .v-space {
             padding: 3px 5px 3px 5px;
             border-radius: 2px;
-            line-height: 1.6rem;
+            line-height: 1.8rem;
         }
         .red {
             background: rgb(224, 159, 133);
@@ -230,7 +230,8 @@
             }
             recognition.onerror = function(event) {
                 log('Error occurred in recognition: ' + event.error);
-                result = `error: ${event.error}`;
+                // result = `error: ${event.error}`;
+                result = "test";
             }
             recognition.onaudiostart = function(event) {
                 log('SpeechRecognition.onaudiostart');
