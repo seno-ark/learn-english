@@ -16,7 +16,6 @@
             font-size: 17px;
             font-family: 'Courier New', Courier, monospace;
             color: #333;
-
             -webkit-user-select: none;
             -webkit-touch-callout: none;
             -moz-user-select: none;
@@ -26,33 +25,31 @@
         h1, h2, h3, h4, h5, h6 {
             color: #111;
         }
-        
         a {
             color: #111;
             text-decoration: none;
             font-weight: bold;
         }
-
         button {
             padding: 4px;
             font-size: 0.8rem;
             font-weight: bold;
+            border: 1px solid #bcbcbc;
+            background: #eaeaea;
+            border-radius: 2px;
         }
-
         logs {
             font-size: 0.6rem;
         }
-
         footer {
-            padding: 20px;
-            font-size: 0.75rem;
+            background: #ffffff;
+        }
+        .center {
             text-align: center;
         }
-
         #header {
             background: #f5f5f5;
         }
-
         .container {
             padding: 20px;
             max-width: 640px;
@@ -68,10 +65,9 @@
         .r-margin {
             margin-right: 5px;
         }
-        .bottom-line {
-            border-bottom: 1px solid #efefef;
+        .bottom-line-wrap:not(:last-child) {
+            border-bottom: 1px solid #eaeaea;
         }
-
         .v-space {
             padding: 3px 5px 3px 5px;
             border-radius: 2px;
@@ -86,9 +82,11 @@
         .yellow {
             background: rgb(238, 247, 146);
         }
-
         .sans {
             font-family: Arial, Helvetica, sans-serif;
+        }
+        .gradient {
+            background-image: linear-gradient(#ffffff, #fafafa);
         }
     </style>
 </head>
@@ -116,11 +114,11 @@
                 <div class="h-space"></div>
             </div>
 
-            <div class="container">
+            <div class="container gradient">
                 <div class="h-space"></div>
 
                 <template x-for="(data, index) in dataList">                    
-                    <div class="h-space">
+                    <div class="h-space bottom-line-wrap">
 
                         <div>
                             <span>🤖</span>
@@ -148,7 +146,7 @@
                             </template>
                         </div>
 
-                        <div class="h-space bottom-line"></div>
+                        <div class="h-space"></div>
 
                     </div>
                 </template>
@@ -156,12 +154,15 @@
         </div>
     </main>
 
-    <div class="container">
-        <h5>Logs</h5>
-        <logs></logs>
-    </div>
-
-    <footer>&copy 2024</footer>
+    <footer>
+        <div class="container">
+            <h5>Logs</h5>
+            <logs></logs>
+        </div>
+        <div class="center h-space">
+            <small>&copy 2024</small>
+        </div>
+    </footer>
 
     <script>
 
@@ -205,9 +206,10 @@
         }
 
         function comListening(phrase, index, callback) {
-            const recognition = new SpeechRecognition();
-            const speechRecognitionList = new SpeechGrammarList();
-            const grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
+            log("phrase: " + phrase);
+            let recognition = new SpeechRecognition();
+            let speechRecognitionList = new SpeechGrammarList();
+            let grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase.toLowerCase() +';';
             speechRecognitionList.addFromString(grammar, 1);
             recognition.grammars = speechRecognitionList;
             recognition.lang = 'en-US';
