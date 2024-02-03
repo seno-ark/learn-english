@@ -88,6 +88,9 @@
         .gradient {
             background-image: linear-gradient(#ffffff, #fafafa);
         }
+        .bold {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -97,10 +100,13 @@
 
             <div id="header" class="container">
                 <div class="h-space"></div>
+                <div class="h-space"></div>
 
                 <b>#<span x-text="id"></span></b>
                 <h1 x-text="title" class="h-space"></h1>
                 <p class="h-space" x-text="description"></p>
+
+                <div class="h-space"></div>
 
                 <div class="h-space flex">
                     <div x-data="{ prevID: id-1 }">
@@ -116,19 +122,25 @@
 
             <div class="container gradient">
                 <div class="h-space"></div>
+                <div class="h-space"></div>
+                <h3>🔥 Learn</h3>
+                <div class="h-space"></div>
 
                 <template x-for="(data, index) in dataList">                    
                     <div class="h-space bottom-line-wrap">
                         <div class="h-space"></div>
 
                         <div>
-                            <span>🤖</span>
+                            <span @click="synthesis(index, -1)">🤖</span>
+                            <!-- 🔊 -->
                             <small x-show="data.speaking.length > 0" class="yellow v-space" x-text="data.speaking"></small>
                         </div>
 
                         <div class="h-space">
                             <template x-for="(s, i) in data.sections">
-                                <span class="r-margin sans" :class="i < data.asnwered ? 'green v-space' : ''" x-text="s.id" @click="synthesis(index, i)"></span>
+                                <span class="r-margin sans" :class="i < data.asnwered ? 'green v-space' : ''" @click="synthesis(index, i)">
+                                    <span :class="s.isSpeak ? 'bold' : ''" x-text="s.id"></span>
+                                </span>
                             </template>
                         </div>
 
@@ -143,7 +155,7 @@
                             </template>
 
                             <template x-if="data.completed">
-                                <button @click="reset(index)">🔥 Reset</button>
+                                <button @click="reset(index)">↺ Restart</button>
                             </template>
                         </div>
 
@@ -172,8 +184,7 @@
         var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
         var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-        const synth = window.speechSynthesis;
-
+        let synth = window.speechSynthesis;
         let voices = [];
 
         function log(msg) {
@@ -183,18 +194,24 @@
             document.querySelector("logs").appendChild(el);
         }
 
-        function comSpeaking(text) {
+        function comSpeaking(text, index, clickedIndex, callback) {
             if (synth.speaking) {
                 log('speechSynthesis.speaking');
-                return "";
+                return;
             }
             if (text === '') {
-                return "";
+                return;
             }
-                
+
+            callback(index, clickedIndex, text);
+
             var utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.onstart = function (event) {
+                log('SpeechSynthesisUtterance.onstart');
+            }
             utterThis.onend = function (event) {
                 log('SpeechSynthesisUtterance.onend');
+                callback(index, clickedIndex, "");
             }
             utterThis.onerror = function (event) {
                 error('SpeechSynthesisUtterance.onerror');
@@ -204,7 +221,6 @@
             // utterThis.voice = voices[0];
             utterThis.rate = 0.7;
             synth.speak(utterThis);
-            return "ok";
         }
 
         function comListening(phrase, index, callback) {
@@ -271,7 +287,7 @@
             for (const w of text.replace("/", "-").split(/[ -]+/)) {
                 sentence.push(w);
                 // || w.endsWith(",")
-                if (w.endsWith(".") || w.endsWith("?") || w.endsWith("!") || w.endsWith(";") || w.endsWith(",")) {
+                if (w.endsWith(".") || w.endsWith("?") || w.endsWith("!") || w.endsWith(";")) {
                     results.push(sentence.join(" "));
                     sentence = [];
                 }
@@ -304,7 +320,8 @@
             for (const i in idSection) {
                 data.sections.push({
                     id: idSection[i],
-                    en: enSection[i]
+                    en: enSection[i],
+                    isSpeak: false
                 })
             }
 
@@ -370,14 +387,33 @@
 
                     this.dataList[index].listening = answerText;
                 },
-                synthesis(index, clickedIndex) {
-                    const text = this.dataList[index].sections[clickedIndex].en;
-                    log("synthesis: " + text);
+                play(index, clickedIndex, text) {
+                    console.log(index, clickedIndex)
+                    this.dataList[index].speaking = text;
 
-                    const newText = comSpeaking(text);
-                    if (newText !== "") {
-                        this.dataList[index].speaking = text;
+                    for (const x in this.dataList[index].sections) {
+                        const xInt = parseInt(x);
+                        let isSpeak = false;
+                        if (text.length > 0 && (clickedIndex === -1 || clickedIndex === xInt)) {
+                            isSpeak = true;
+                        }
+                        console.log(index, xInt, isSpeak, text.length, clickedIndex)
+                        this.dataList[index].sections[xInt].isSpeak = isSpeak;
                     }
+                },
+                synthesis(index, clickedIndex) {
+                    const clicked = parseInt(clickedIndex);
+
+                    let text = "";
+                    if (clicked === -1) {
+                        log("minus one");
+                        text = this.dataList[index].en;
+                    } else {
+                        text = this.dataList[index].sections[clicked].en;
+                    }
+
+                    log("synthesis: " + text);
+                    comSpeaking(text, index, clicked, this.play.bind(this));
                 },
                 recognize(index) {
                     if (this.dataList[index].completed === true) {
