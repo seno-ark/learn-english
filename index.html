@@ -287,7 +287,7 @@
             for (const w of text.replace("/", "-").split(/[ -]+/)) {
                 sentence.push(w);
                 // || w.endsWith(",")
-                if (w.endsWith(".") || w.endsWith("?") || w.endsWith("!") || w.endsWith(";")) {
+                if (w.endsWith(".") || w.endsWith("?") || w.endsWith("!") || w.endsWith(";") || w.endsWith(",")) {
                     results.push(sentence.join(" "));
                     sentence = [];
                 }
