@@ -44,6 +44,28 @@
         footer {
             background: #ffffff;
         }
+        dialog {
+            margin: 0px auto;
+            width: 95%;
+            max-width: 600px;
+            border: 1px solid #dadada;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0px 0px 5px #ddd;
+        }
+        dialog textarea {
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            outline: none;
+            resize: none;
+        }
+        dialog button {
+            margin-top: 10px;
+            width: 100%;
+        }
         .center {
             text-align: center;
         }
@@ -131,7 +153,7 @@
                         <div class="h-space"></div>
 
                         <div>
-                            <span @click="synthesis(index, -1)">🤖</span>
+                            <span @click="synthesis(index, -1)">🤖 </span>
                             <!-- 🔊 -->
                             <small x-show="data.speaking.length > 0" class="yellow v-space" x-text="data.speaking"></small>
                         </div>
@@ -145,9 +167,19 @@
                         </div>
 
                         <div>
+                            <dialog class="modal" x-bind:open="data.showModal" @mousedown.outside="data.showModal = false">
+                                <div>
+                                    <textarea :id=`inputText_${index}` x-model="data.listening"></textarea>
+                                </div>
+                                <div>
+                                    <button @click="submitText(index)">Submit</button>
+                                </div>
+                            </dialog>
+
                             <template x-if="!data.completed">
                                 <div>
-                                    <button x-show="!isListening" @click="recognize(index)">💬 Speak</button>
+                                    <button x-show="!isListening && !data.showModal" @click="data.showModal = true">✍🏻 Write</button>
+                                    <button x-show="!isListening && !data.showModal" @click="recognize(index)">💬 Speak</button>
                                     <div x-show="data.listening.length > 0" class="h-space">
                                         <small class="red v-space" x-text="data.listening"></small>
                                     </div>
@@ -309,6 +341,7 @@
             data.speaking = "";
             data.listening = "";
             data.completed = false;
+            data.showModal = false;
 
             const idSection = splitText(data.id);
             const enSection = splitText(data.en);
@@ -426,6 +459,20 @@
                     const phrase = replaceSymbol(this.dataList[index].en);
                     log("recognize: " + phrase);
                     comListening(phrase, index, this.answer.bind(this));
+                },
+                submitText(index) {
+                    const text = this.dataList[index].listening;
+
+                    if (text === "") {
+                        return;
+                    }
+
+                    this.dataList[index].showModal = false;
+
+                    if (this.dataList[index].completed === true) {
+                        return;
+                    }
+                    this.answer(index, text);
                 },
                 getData() {
                     this.isLoading = true;
